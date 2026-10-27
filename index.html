@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><!-- Login/Signup Functions -->
+  <script>
+    async function handleSignUp(email, password) {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+      if (error) alert("Error signing up: " + error.message);
+      else alert("Account created! Check your email for confirmation.");
+    }
+
+    async function handleLogin(email, password) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+      if (error) alert("Error logging in: " + error.message);
+      else window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grid & Meridian | Canada & USA FSBO Network</title>
