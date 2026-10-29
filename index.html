@@ -368,7 +368,7 @@ Wyoming
                 </div>
 
                 <div class="bg-white p-3.5 rounded-2xl border border-slate-200 space-y-1.5">
-                    <label class="font-bold text-slate-900 block">4. Upload Property Photos (1 to 2 Photos)</label>
+                    <label class="font-bold text-slate-900 block" id="photo-limit-label">Upload Property Photos (up to 15 Photos)</label>
                     <input type="file" id="new-files" multiple accept="image/*" class="w-full text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:font-bold file:bg-amber-500 file:text-slate-950">
                 </div>
 
@@ -649,14 +649,20 @@ Wyoming
             selectedTierName = tierName;
             selectedTierPrice = price;
             selectedTierMaxPhotos = maxPhotos;
-            ['Silver', 'Gold', 'Platinum'].forEach(t => {
-                const btn = document.getElementById(`tier-btn-${t}`);
-                if (btn) {
-                    btn.className = (t === tierName)
-                        ? 'p-2.5 rounded-xl bg-amber-50 border-2 border-amber-500 text-center font-black text-amber-700'
-                        : 'p-2.5 rounded-xl bg-white border border-slate-200 text-center font-bold text-slate-700 hover:border-amber-500';
-                }
-            });
+           // Put the photo label update right here:
+  const photoLabel = document.getElementById('photo-limit-label');
+  if (photoLabel) {
+    photoLabel.textContent = `Upload Property Photos (up to ${maxPhotos} Photos)`;
+  }
+
+  ['Silver', 'Gold', 'Platinum'].forEach(t => {
+    const btn = document.getElementById(`tier-btn-${t}`);
+    if (btn) {
+      btn.className = (t === tierName)
+        ? 'p-2.5 rounded-xl bg-amber-50 border-2 border-amber-500 text-center font-black text-amber-700'
+        : 'p-2.5 rounded-xl bg-white border border-slate-200 text-center font-bold text-slate-700 hover:border-ambe';
+    }
+  });
             const displayPrice = currentCurrency === 'CAD' ? Math.round(price * cadRate) : price;
             document.getElementById('checkout-total').innerText = `$${displayPrice.toLocaleString()} ${currentCurrency}`;
         }
